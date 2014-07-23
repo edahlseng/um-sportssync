@@ -3,14 +3,14 @@ var nodeStatic = require('node-static');
 //
 // Create a node-static server instance to serve the './public' folder
 //
-var staticFileServer = new nodeStatic.Server('./public');
+var staticFiles = new nodeStatic.Server('./public');
 
-require('http').createServer(function (request, response) {
+var server = require('http').createServer(function (request, response) {
 	request.addListener('end', function() {
 		//
 		// Serve files!
 		//
-		staticFileServer.serve(request, response);
+		staticFiles.serve(request, response);
 	}).resume();
 }).listen(8080);
 console.log('Server running on 8080');
@@ -18,23 +18,56 @@ console.log('Server running on 8080');
 
 
 
-// Using socket.io for audio and text base
-// ========================
+// Using socket.io for text, replays, gifs, audio connection setup
+// ===============================================================
+
+var usersLoggedIn = [];
+
+var io = require('socket.io').listen(server);
+
+// Called on a new connection from the client.  The socket object should be referenced for future communication with an explicity client
+io.sockets.on('connection', function (socket) {
+	
+	// The username for this socket.
+	//var user = User();
+	var UserUsername;
+
+	socket.on('audioMessage', function (message) {
+		console.log('Received audio message: ', message.type);
+		console.log('sending from ', UserUsername);
+		// for a real app, would be room only (not broadcast), and probably only to one specific individual
+		socket.broadcast.emit('audioMessage', message);
+	});
+
+	socket.on("join", function (username) {
+		UserUsername = username;
+		if (true) // could check here for username verification
+		{
+			response = {'errorCode' : 0, 'users' : usersLoggedIn};
+			socket.emit("joined", response);
+
+			// add to list of usernames here
+			usersLoggedIn.push(UserUsername);
+
+			socket.broadcast.emit("gropUpdate", username + " has joined the server.");
+		}
+		else
+		{
+			// send a request denied message.  disconnect socket
+		}
+	});
+
+	socket.on('chatMessage', function (message) {
+		// Message passed by a client to ther server with the intent of broadcasting to the chatroom
+		// optionally check here for user verification
+		io.socket.broadcast.emit("message", UserUsername + " says " + message);
+	});
 
 
-// var io = require('socket.io').listen();
 
-// io.sockets.on('connection', function (socket) {
-// 	// our other events...
-// 	socket.on('setPseudo', function (data) {
-// 		socket.set('pseudo', data);
-// 	});
+	socket.on("disconnect", function() {
+		io.sockets.emit("update", UserUsername + " has left the server");
+	});
 
-// 	socket.on('message', function (message) {
-// 		socket.get('pseudo', function (error, name) {
-// 			var data = {'message' : message, pseudo : name};
-// 			socket.broadcast.emit('message', data);
-// 			console.log("user " + name + " send this : " + message);
-// 		})
-// 	})
-// });
+
+});
