@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>SportsSync</title>
+
+		<link rel="stylesheet" href="sportsSync.css"></link>
+		<script src="sportsSync.js"></script>
+		<link href="http://maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet">
+
+	</head>
+	<body id="body">
+
+		<div id="header">
+			<h1>SportsSync</h1>
+			<div id="people">
+				<ul class="horizontalList">
+					<li id="hereNow">Who's here now: </li>
+					<li><img class="icon" src="http://pldb.media.mit.edu/face/savannah"></li>
+					<li><img class="icon" src="http://pldb.media.mit.edu/face/dahlseng"></li>
+					<li><img class="icon" src="http://pldb.media.mit.edu/face/trich"></li>
+					<li><img class="icon" src="http://pldb.media.mit.edu/face/ahope"></li>
+				</ul>
+			</div>
+		</div>
+
+		<div id="sidebar" class="open">
+			<div id="sidebarToggle"><i class="fa fa-comments-o fa-lg"></i></div>
+			<div id="stream">
+
+			<ul id="streamList">
+				<!-- Faked content for demo -->
+				<li>
+					<div class="author">
+						<img class="icon chatIcon" src="http://pldb.media.mit.edu/face/savannah">
+						<span class="name">Savannah Niles</span>
+						<div class="videoTimeStamp">1:15</div>
+					</div>
+					<div class="message">chlssldfjlsdjfat</div>
+				</li>
+				<li>
+					<div class="author">
+						<img class="icon chatIcon" src="http://pldb.media.mit.edu/face/trich">
+						<span class="name">Travis Rich</span>
+						<div class="videoTimeStamp">1:17</div>
+					</div>
+					<div class="message"><img src="https://lh3.ggpht.com/xDgEZKnV6btuM19GptKF3Xff1lRzYdJgpzTi2vfxW7tbwywSqUIStHaP9g2DT2rBuhc=h900"></div>
+				</li>
+				<li>
+					<div class="author">
+						<img class="icon chatIcon" src="http://pldb.media.mit.edu/face/trich">
+						<span class="name">Travis Rich</span>
+						<div class="videoTimeStamp">1:17</div>
+					</div>
+					<div class="message">lsdkjflakjdfla alkjdfladjf  lajdflakjd la df lajdlajd lajdl aj</div>
+				</li>
+				<li>
+					<div class="author">
+						<img class="icon chatIcon" src="http://pldb.media.mit.edu/face/dahlseng">
+						<span class="name">Eric Dahlseng</span>
+						<div class="videoTimeStamp">1:20</div>
+					</div>
+					<div class="message">alksjdlaks laj slda sjldaj sd lajdslaosyoha  lasdayd akdhkagf aaldald jla  dhakhdakyiakdh kaydh</div>
+				</li>
+				<li>
+					<div class="author">
+						<img class="icon chatIcon" src="http://pldb.media.mit.edu/face/savannah">
+						<span class="name">Savannah Niles</span>
+						<div class="videoTimeStamp">1:25</div>
+					</div>
+					<div class="message">lajdald</div>
+				</li>
+				<li>
+					<div class="author">
+						<img class="icon chatIcon" src="http://pldb.media.mit.edu/face/ahope">
+						<span class="name">Alexis Hope</span>
+						<div class="videoTimeStamp">1:27</div>
+					</div>
+					<div class="message">aljdlaj</div>
+				</li>
+				<li>
+					<div class="author">
+						<img class="icon chatIcon" src="http://pldb.media.mit.edu/face/trich">
+						<span class="name">Travis Rich</span>
+						<div class="videoTimeStamp">1:17</div>
+					</div>
+					<div class="message"><img src="http://web.media.mit.edu/~trich/travis_and_kevin.gif"></div>
+				</li>
+			</ul>
+
+
+			</div>
+		</div>
+		<div id="main">
+			<div id="videoPlayer"></div>
+			<div id="addPost">
+				<div id="postControls">
+					<ul class="horizontalList">
+						<li><i class="fa fa-comment-o" id="commentButton"></i></li>
+						<li><i class="fa fa-camera-retro"></i></li>
+						<li><i class="fa fa-retweet"></i></li>
+						<li><i class="fa fa-smile-o"></i></li>
+						<li><i class="fa fa-life-saver"></i></li>
+					</ul>
+				</div>
+				<div id="postInput" class="closed"><textarea rows="3" id="textInput" type="text" name="textInput" placeholder="Type a message..."></textarea></div>
+
+			</div>
+		</div>
+		<div id="loading">Loading...</div>
+
+
+		
+
+	</body>
+</html>
