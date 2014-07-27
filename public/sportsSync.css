@@ -159,6 +159,16 @@ i:hover {
 	max-height: 130px;
 }
 
+.bet {
+	font-size: 110%;
+	padding-left: 10px;
+	border-left: 2px solid #FCFF32;
+}
+
+.bet span {
+	font-weight: bold;
+}
+
 /*-------        Main        -------*/
 
 #main {
@@ -192,7 +202,7 @@ i:hover {
 	/*width: 800px;*/
 }
 
-#postInput {
+#postInput, #betInput {
 	padding-top: 10px;
 	width: 50%;	
 	height: 0px;
@@ -201,7 +211,7 @@ i:hover {
     transition: height .25s;
 }
 
-#textInput {
+.textInput {
 	width: 99%;
 	resize: none;
 }

@@ -47,9 +47,28 @@ function commentToggle () {
 	}
 }
 
+function inputToggle (elementId) {
+	var input = document.getElementById(elementId);
+	console.log(input);
+
+	if (input.getAttribute('class') == "open") {
+		input.style.height = "0px";
+		input.className = "closed";
+	}
+	else if (input.getAttribute('class') == "closed") {
+		input.style.height = "35px";
+		input.className = "open";
+	}
+}
+
 function submitPost (val) {
 	console.log(val);
-	document.getElementById("textInput").value = "";
+	document.getElementById("postInputBox").value = "";
+}
+
+function submitBet (val) {
+	console.log(val);
+	// document.getElementById("betInputBox").value = "";
 }
 
 window.addEventListener('resize', function(event){
@@ -84,11 +103,26 @@ window.onload = function(event){
 		commentToggle();
 	};
 
-	document.getElementById("textInput").addEventListener("keydown", function(e) {
+	document.getElementById("postInputBox").addEventListener("keydown", function(e) {
 	    if (!e) { var e = window.event; }
 	    if (e.keyCode == 13) { 
 	    	e.preventDefault(); //prevent enter from happening
-	    	submitPost(document.getElementById("textInput").value); 
+	    	submitPost(document.getElementById("postInputBox").value); 
+	    	document.getElementById("postInputBox").value = "";
+	    }
+	}, false);
+
+	document.getElementById('betButton').onclick = function(event){
+		console.log("clicked betButton");
+		inputToggle("betInput");
+	};
+
+	document.getElementById("betInputBox").addEventListener("keydown", function(e) {
+	    if (!e) { var e = window.event; }
+	    if (e.keyCode == 13) { 
+	    	e.preventDefault(); //prevent enter from happening
+	    	submitBet(document.getElementById("betInputBox").value);
+	    	document.getElementById("betInputBox").value = ""; 
 	    }
 	}, false);
 
