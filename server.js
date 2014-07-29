@@ -5,6 +5,8 @@ var nodeStatic = require('node-static');
 //
 var staticFiles = new nodeStatic.Server('./public');
 
+var port = process.argv[2] || 8080;
+
 var server = require('http').createServer(function (request, response) {
 	request.addListener('end', function() {
 		//
@@ -12,8 +14,8 @@ var server = require('http').createServer(function (request, response) {
 		//
 		staticFiles.serve(request, response);
 	}).resume();
-}).listen(8080);
-console.log('Server running on 8080');
+}).listen(port);
+console.log('Server running on %d', port);
 
 
 
