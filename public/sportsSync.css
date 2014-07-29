@@ -1,0 +1,228 @@
+/*Colors*/
+
+/*Teal: #349AD8*/
+/*yellow: #D3D636*/
+/*dark gray: #697B84;
+/*darkMain: #202029*/
+/*sidebar: #292934*/
+/*lightgray*/
+
+
+body {
+	margin: 0;
+	font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;	
+	height: 100%;
+	overflow: hidden;
+}
+
+#loading {
+	width: 100%;
+	height: 100%;
+	background: #202029;
+	color: white;
+	position: absolute;
+	top: 0;
+	z-index: 3;
+	-webkit-transition: opacity .5s; /* For Safari 3.1 to 6.0 */
+    transition: opacity .5s;
+}
+
+i:hover {
+	color: #349AD8;
+	cursor: pointer;
+}
+
+/*-------        Header        -------*/
+
+#header {
+	background: #349AD8;
+	width: 100%;
+	height: 50px;
+	color:  white;
+	position: absolute;
+	z-index: 2;
+}
+
+#header h1 {
+	margin: 2px 10px;
+	font-weight: 200;
+	letter-spacing: 3px;
+}
+
+#people {
+	position: absolute;
+	top: 0px;
+	right: 0;
+	/*background: #01CEDB;*/
+	/*background: #D3D636;*/
+	background: #697B84;
+	color: #FCFF32;
+	padding: 0 0 7px 15px;
+}
+
+.horizontalList {
+	margin-top: 10px;
+	margin-bottom: 0px;
+	padding: 0;
+}
+
+.horizontalList li {
+	display: inline;
+	list-style-type: none;
+	padding-right: 5px;
+}
+
+#hereNow {
+	position: relative;
+	top: -9px;
+	font-weight: 200;
+	/*color: gray;*/
+}
+
+.icon {
+	width: 30px;
+	height: 30px;
+	border-radius: 20px;
+}
+
+/*-------        Sidebar        -------*/
+
+#sidebar {
+	display: inline-block;
+	height: 100%;
+	width: 33%;
+	background: #292934;
+	margin-top: 50px;
+	overflow-x: hidden;
+	overflow-y: scroll;
+}
+
+#sidebarToggle {
+	width: 100%;
+	text-align: right;
+	color: lightgray;
+	padding-top: 5px;
+}
+
+#sidebarToggle i {
+	padding: 5px
+}
+
+#sidebar, #main {
+	-webkit-transition: width 1s; /* For Safari 3.1 to 6.0 */
+    transition: width 1s;
+}
+
+/*-------        Stream        -------*/
+
+#stream {
+	color: lightgray;
+	padding: 0 10px;
+	-webkit-transition: padding 1s; /* For Safari 3.1 to 6.0 */
+    transition: padding 1s;
+    height: 83%;
+    position: absolute;
+	width: 32%;
+	overflow-y: scroll;
+}
+
+#streamList {
+	list-style: none;
+	padding: 0;
+	margin: 0;
+}
+
+#stream li {
+	padding: 5px;
+	font-weight: 300;
+}
+
+.name {
+	color: #FCFF32;
+	font-weight: 200;
+}
+
+.chatIcon {
+	margin-right: 10px;
+	position: relative;
+	top: 7px;
+}
+
+.videoTimeStamp {
+	text-align: right;
+	position: relative;
+	top: -18px;
+	color: #697B84;
+}
+
+#stream li img {
+	max-height: 130px;
+}
+
+.bet {
+	font-size: 110%;
+	padding-left: 10px;
+	border-left: 2px solid #FCFF32;
+}
+
+.bet span {
+	font-weight: bold;
+}
+
+/*-------        Main        -------*/
+
+#main {
+	display: inline-block;
+	position: absolute;
+	background: #202029;
+	color: white;
+	height: 100%;
+	width: 67%;
+	overflow: hidden;
+}
+
+#videoPlayer {
+	background: black;
+	color: white;
+	margin: 80px auto 20px auto;
+	/*height: 350px;*/
+	/*width: 800px;*/
+	background-image: url("https://lh3.ggpht.com/xDgEZKnV6btuM19GptKF3Xff1lRzYdJgpzTi2vfxW7tbwywSqUIStHaP9g2DT2rBuhc=h900");
+	background-size: cover;
+
+}
+
+/*-------        addPost        -------*/
+
+#addPost {
+	background: #202029;
+	margin: 20px auto;
+	color: black;
+	height: 75px;
+	/*width: 800px;*/
+}
+
+#postInput, #betInput {
+	padding-top: 10px;
+	width: 50%;	
+	height: 0px;
+	overflow: hidden;
+	-webkit-transition: height .25s; /* For Safari 3.1 to 6.0 */
+    transition: height .25s;
+}
+
+.textInput {
+	width: 99%;
+	resize: none;
+}
+
+#postControls {
+	/*padding: 0px 10px;*/
+	color: gray;
+}
+
+#postControls .horizontalList {
+	margin-top: 0px;
+}
+
+
