@@ -62,7 +62,7 @@ function submitBet (val) {
 
 function updateStream (response) {
 	console.log(response);
-	var user = "testing", //response.user,
+	var user = response.user,
 		userThumb = "http://pldb.media.mit.edu/face/" + user,
 		type = response.messageType,
 		message = response.message,
