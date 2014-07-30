@@ -169,3 +169,10 @@ function displayLoggedIn(username)
 	var userIcon = document.getElementById(username + "Icon");
 	userIcon.className += " currentUserIcon"
 }
+
+function startReplay() {
+	var maxTime = document.getElementById('videoPlayer').currentTime
+	var minTime = Math.max(0, maxTime - 15);
+
+	
+}
