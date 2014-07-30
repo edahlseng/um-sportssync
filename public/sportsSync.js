@@ -85,9 +85,13 @@ function updateStream (response) {
 
 	console.log (liHtml);
 
-	var stream = document.getElementById("streamList");
+	var ul = document.getElementById("streamList"),
+		stream = document.getElementById("stream");
+	li.style.opacity = '0';
 	li.innerHTML = liHtml;
-	stream.appendChild(li);
+	ul.appendChild(li);
+	stream.scrollTop = stream.scrollHeight;
+	li.style.opacity = 1; //set height to inherit for effect
 }
 
 window.addEventListener('resize', function(event){
@@ -104,10 +108,12 @@ window.onload = function(event){
 		videoHeight = 800,
 		mainWidth = document.getElementById('main').clientWidth,
 		video = document.getElementById('videoPlayer'),
+		videoContainer = document.getElementById('videoContainer'),
 		addPost = document.getElementById('addPost');
 
 	video.style.width = mainWidth - 150 + 'px';
 	addPost.style.width = mainWidth - 150 + 'px';
+	videoContainer.style.width = mainWidth - 150 + 'px';
 	video.style.height = (videoHeight*(mainWidth - 150)/videoWidth) + 'px';
 
 	//event listeners

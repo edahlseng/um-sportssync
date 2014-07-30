@@ -13,6 +13,7 @@ body {
 	font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;	
 	height: 100%;
 	overflow: hidden;
+	background: #202029;
 	/*position: relative;*/
 }
 
@@ -104,7 +105,6 @@ i:hover {
 	background: #292934;
 	margin-top: 50px;
 	overflow-x: hidden;
-	overflow-y: scroll;
 }
 
 #sidebarToggle {
@@ -150,6 +150,9 @@ i:hover {
 #stream li {
 	padding: 5px;
 	font-weight: 300;
+	overflow: hidden;
+	-webkit-transition: opacity .25s; /* For Safari 3.1 to 6.0 */
+    transition: opacity .25s;
 }
 
 .name {
@@ -195,12 +198,18 @@ i:hover {
 	width: 67%;
 	right: 0px;
 	/*overflow: hidden;*/
+	top: 50px;
+}
+
+#videoContainer {
+	margin: 80px auto;
+	margin-bottom: 0px;
 }
 
 #videoPlayer {
 	background: black;
 	color: white;
-	margin: 80px auto 20px auto;
+	/*margin: 80px 75px 0 75px;*/
 	/*height: 350px;*/
 	/*width: 800px;*/
 	background-image: url("https://lh3.ggpht.com/xDgEZKnV6btuM19GptKF3Xff1lRzYdJgpzTi2vfxW7tbwywSqUIStHaP9g2DT2rBuhc=h900");
