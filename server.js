@@ -26,10 +26,10 @@ console.log('Server running on %d', port);
 var usersLoggedIn = [];
 
 var io = require('socket.io').listen(server);
-
+console.log('io is: ', io);
 // Called on a new connection from the client.  The socket object should be referenced for future communication with an explicity client
 io.sockets.on('connection', function (socket) {
-	
+	console.log('we have a new connection');	
 	// The username for this socket.
 	//var user = User();
 	var UserUsername;
@@ -42,6 +42,7 @@ io.sockets.on('connection', function (socket) {
 	});
 
 	socket.on("join", function (username) {
+		console.log('someone wants to join');
 		UserUsername = username;
 		if (true) // could check here for username verification
 		{
