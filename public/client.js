@@ -5,6 +5,7 @@ var currentUsername;
 function join(username)
 {
 	currentUsername = username;
+	console.log("Attempting to join as:", username);
 	socket.emit("join", username);
 }
 
@@ -30,7 +31,11 @@ function sendMessage(message, type)
 // }
 
 socket.on("joined", function (info) {
-	console.log(info);
+	if (info.errorCode == 0)
+	{
+		displayLoggedIn(info.username);
+		console.log(info.users.length, "users logged in");
+	}
 });
 
 socket.on("groupUpdate", function (info) {
