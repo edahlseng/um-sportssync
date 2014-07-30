@@ -106,7 +106,12 @@ i:hover {
 }
 
 #sidebarToggle i {
-	padding: 5px
+	padding: 5px;
+	cursor: default;
+}
+
+#sidebarToggle i:hover {
+	color: lightgray;
 }
 
 #sidebar, #main {
