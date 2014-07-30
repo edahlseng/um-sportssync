@@ -34,10 +34,10 @@
 			<div id="people">
 				<ul class="horizontalList">
 					<li id="hereNow">Who's here now: </li>
-					<li><img class="icon" src="http://pldb.media.mit.edu/face/savannah"></li>
-					<li><img class="icon" src="http://pldb.media.mit.edu/face/dahlseng"></li>
-					<li><img class="icon" src="http://pldb.media.mit.edu/face/trich"></li>
-					<li><img class="icon" src="http://pldb.media.mit.edu/face/ahope"></li>
+					<li onclick=joinAsUser('savannah')><img id="savannahIcon" class="icon" src="http://pldb.media.mit.edu/face/savannah"></li>
+					<li onclick=joinAsUser('dahlseng')><img id="dahlsengIcon" class="icon" src="http://pldb.media.mit.edu/face/dahlseng"></li>
+					<li onclick=joinAsUser('trich')><img id="trichIcon" class="icon" src="http://pldb.media.mit.edu/face/trich"></li>
+					<li onclick=joinAsUser('ahope')><img id="ahopeIcon" class="icon" src="http://pldb.media.mit.edu/face/ahope"></li>
 				</ul>
 			</div>
 		</div>
@@ -118,7 +118,7 @@
 			</div>
 		</div>
 		<div id="main">
-			<div id="videoPlayer"></div>
+			<video id="videoPlayer" src="/videoAssets/superbowl2014.mp4" autoplay></video>
 			<div id="addPost">
 				<div id="postControls">
 					<ul class="horizontalList">
