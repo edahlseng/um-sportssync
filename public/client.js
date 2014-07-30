@@ -1,5 +1,5 @@
-//var socket = io.connect("http://127.0.0.1:8080");
-var socket = io.connect("http://um-sportssync.media.mit.edu:10014");
+var socket = io.connect("http://127.0.0.1:8080");
+// var socket = io.connect("http://um-sportssync.media.mit.edu:10014");
 var currentUsername;
 
 function join(username)
@@ -8,10 +8,26 @@ function join(username)
 	socket.emit("join", username);
 }
 
-function sendMessage(message)
+function sendMessage(message, type)
 {
-	socket.emit("chatMessage", message);
+	console.log("sending message: " + message);
+	var data = {
+		message: message,
+		type: type
+	}
+	socket.emit("chatMessage", data);
 }
+
+// function sendBet(bet)
+// {
+// 	console.log("sending bet: " + bet);
+// 	var data = {
+// 		message: bet,
+// 		type: type
+// 	}
+// 	socket.emit("chatMessage", [bet, "bet"]);
+// 	//later code to do other betting shit
+// }
 
 socket.on("joined", function (info) {
 	console.log(info);
@@ -21,8 +37,9 @@ socket.on("groupUpdate", function (info) {
 	console.log(info);
 });
 
-socket.on("chatMessage", function (message) {
-	console.log(message);
+socket.on("chatMessage", function (response) {
+	console.log(response);
+	updateStream(response);
 });
 
 

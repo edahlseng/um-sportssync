@@ -15,42 +15,28 @@ function setBodyHeight() {
 	body.style.height = x + "px";
 }
 
-function sidebarToggle () {
-	var sidebar = document.getElementById('sidebar'),
-		main = document.getElementById('main'),
-		stream = document.getElementById('stream');
+// function sidebarToggle () {
+// 	var sidebar = document.getElementById('sidebar'),
+// 		main = document.getElementById('main'),
+// 		stream = document.getElementById('stream');
 
-	if (sidebar.getAttribute('class') == "open") {
-		sidebar.style.width = "2%";
-		sidebar.className = "closed";
-		main.style.width = '97%';
-		stream.style.padding = '0 30px';
-	}
-	else if (sidebar.getAttribute('class') == "closed") {
-		sidebar.style.width = "33%";
-		sidebar.className = "open";
-		main.style.width = '66%';
-		stream.style.padding = '0 10px';
-	}
-}
-
-function commentToggle () {
-	var postInput = document.getElementById('postInput');
-	console.log(postInput);
-
-	if (postInput.getAttribute('class') == "open") {
-		postInput.style.height = "0px";
-		postInput.className = "closed";
-	}
-	else if (postInput.getAttribute('class') == "closed") {
-		postInput.style.height = "35px";
-		postInput.className = "open";
-	}
-}
+// 	if (sidebar.getAttribute('class') == "open") {
+// 		sidebar.style.width = "2%";
+// 		sidebar.className = "closed";
+// 		main.style.width = '97%';
+// 		stream.style.padding = '0 30px';
+// 	}
+// 	else if (sidebar.getAttribute('class') == "closed") {
+// 		sidebar.style.width = "33%";
+// 		sidebar.className = "open";
+// 		main.style.width = '66%';
+// 		stream.style.padding = '0 10px';
+// 	}
+// }
 
 function inputToggle (elementId) {
 	var input = document.getElementById(elementId);
-	console.log(input);
+	// console.log(input);
 
 	if (input.getAttribute('class') == "open") {
 		input.style.height = "0px";
@@ -63,22 +49,54 @@ function inputToggle (elementId) {
 }
 
 function submitPost (val) {
-	console.log(val);
+	console.log("chat: " + val);
+	sendMessage(val, "chat");
 	document.getElementById("postInputBox").value = "";
 }
 
 function submitBet (val) {
-	console.log(val);
+	console.log("bet: " + val);
+	sendMessage(val, "bet");
 	// document.getElementById("betInputBox").value = "";
 }
 
+function updateStream (response) {
+	console.log(response);
+	var user = "testing", //response.user,
+		userThumb = "http://pldb.media.mit.edu/face/" + user,
+		type = response.messageType,
+		message = response.message,
+		li = document.createElement("li"),
+		liHtml = "<div class='author'><img class='icon chatIcon' src={userThumb}><span class='name'>{userName}</span><div class='videoTimeStamp'>1:15</div></div><div class='message {className}'>{message}</div>";
+	
+	liHtml = liHtml.replace("{userThumb}", "'" + userThumb + "'")
+		.replace("{userName}", user);
+
+	//handle chat message types:
+	if (type === "chat") {
+		liHtml = liHtml.replace("{message}", message)
+			.replace("{className}", "");	
+	}
+	if (type === "bet") {
+		betHtml = user + " bets: <span>" + message + "</span>";
+		liHtml = liHtml.replace("{message}", betHtml)
+			.replace("{className}", "bet");	
+	}
+
+	console.log (liHtml);
+
+	var stream = document.getElementById("streamList");
+	li.innerHTML = liHtml;
+	stream.appendChild(li);
+}
+
 window.addEventListener('resize', function(event){
-	console.log("resizing");
+	// console.log("resizing");
   	setBodyHeight();
 });
 
 window.onload = function(event){
-	console.log ("loaded");
+	// console.log ("loaded");
 	setBodyHeight();
 
 	//set video width
@@ -100,8 +118,8 @@ window.onload = function(event){
 	// };
 
 	document.getElementById('commentButton').onclick = function(event){
-		console.log("clicked commentButton");
-		commentToggle();
+		// console.log("clicked commentButton");
+		inputToggle("postInput");
 	};
 
 	document.getElementById("postInputBox").addEventListener("keydown", function(e) {
@@ -114,7 +132,7 @@ window.onload = function(event){
 	}, false);
 
 	document.getElementById('betButton').onclick = function(event){
-		console.log("clicked betButton");
+		// console.log("clicked betButton");
 		inputToggle("betInput");
 	};
 
