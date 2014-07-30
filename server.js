@@ -1,22 +1,19 @@
-var nodeStatic = require('node-static');
+var express = require('express');
 
-//
-// Create a node-static server instance to serve the './public' folder
-//
-var staticFiles = new nodeStatic.Server('./public');
+var app = express();
+
+// render the main page
+app.get('/', function (request, response) {
+	response.sendfile('public/index.html');
+});
+
+// serve up static resources
+app.use(express.static(__dirname + '/public'));
 
 var port = process.argv[2] || 8080;
-
-var server = require('http').createServer(function (request, response) {
-	request.addListener('end', function() {
-		//
-		// Serve files!
-		//
-		staticFiles.serve(request, response);
-	}).resume();
-}).listen(port);
-console.log('Server running on %d', port);
-
+var server = app.listen(port, function() {
+	console.log('Server running on %d', port);
+});
 
 
 
