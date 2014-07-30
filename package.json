@@ -1,0 +1,24 @@
+{
+  "name": "um-sportssync",
+  "version": "0.0.0",
+  "description": "um-sportssync =============",
+  "main": "server.js",
+  "dependencies": {
+    "node-static": "~0.7.4",
+    "socket.io": "~1.0.6"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/edahlseng/um-sportssync.git"
+  },
+  "author": "",
+  "bugs": {
+    "url": "https://github.com/edahlseng/um-sportssync/issues"
+  },
+  "homepage": "https://github.com/edahlseng/um-sportssync"
+}
