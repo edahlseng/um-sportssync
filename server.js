@@ -70,6 +70,7 @@ io.sockets.on('connection', function (socket) {
 
 	socket.on("disconnect", function() {
 		io.sockets.emit("update", UserUsername + " has left the server");
+		usersLoggedIn.pop(UserUsername);
 	});
 
 
