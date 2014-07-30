@@ -5,6 +5,8 @@ var nodeStatic = require('node-static');
 //
 var staticFiles = new nodeStatic.Server('./public');
 
+var port = process.argv[2] || 8080;
+
 var server = require('http').createServer(function (request, response) {
 	request.addListener('end', function() {
 		//
@@ -12,8 +14,8 @@ var server = require('http').createServer(function (request, response) {
 		//
 		staticFiles.serve(request, response);
 	}).resume();
-}).listen(8080);
-console.log('Server running on 8080');
+}).listen(port);
+console.log('Server running on %d', port);
 
 
 
@@ -27,7 +29,7 @@ var io = require('socket.io').listen(server);
 
 // Called on a new connection from the client.  The socket object should be referenced for future communication with an explicity client
 io.sockets.on('connection', function (socket) {
-	
+	console.log('we have a new connection');	
 	// The username for this socket.
 	//var user = User();
 	var UserUsername;
@@ -40,6 +42,7 @@ io.sockets.on('connection', function (socket) {
 	});
 
 	socket.on("join", function (username) {
+		console.log(username, "wants to join");
 		UserUsername = username;
 		if (true) // could check here for username verification
 		{
@@ -60,13 +63,15 @@ io.sockets.on('connection', function (socket) {
 	socket.on('chatMessage', function (message) {
 		// Message passed by a client to ther server with the intent of broadcasting to the chatroom
 		// optionally check here for user verification
-		io.socket.broadcast.emit("message", UserUsername + " says " + message);
+		console.log("broadcasting message:", message);
+		io.sockets.emit("chatMessage", UserUsername + " says " + message);
 	});
 
 
 
 	socket.on("disconnect", function() {
 		io.sockets.emit("update", UserUsername + " has left the server");
+		usersLoggedIn.pop(UserUsername);
 	});
 
 

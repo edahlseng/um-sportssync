@@ -13,6 +13,7 @@ body {
 	font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;	
 	height: 100%;
 	overflow: hidden;
+	/*position: relative;*/
 }
 
 #loading {
@@ -105,7 +106,12 @@ i:hover {
 }
 
 #sidebarToggle i {
-	padding: 5px
+	padding: 5px;
+	cursor: default;
+}
+
+#sidebarToggle i:hover {
+	color: lightgray;
 }
 
 #sidebar, #main {
@@ -178,7 +184,8 @@ i:hover {
 	color: white;
 	height: 100%;
 	width: 67%;
-	overflow: hidden;
+	right: 0px;
+	/*overflow: hidden;*/
 }
 
 #videoPlayer {
