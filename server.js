@@ -26,7 +26,7 @@ console.log('Server running on %d', port);
 var usersLoggedIn = [];
 
 var io = require('socket.io').listen(server);
-console.log('io is: ', io);
+
 // Called on a new connection from the client.  The socket object should be referenced for future communication with an explicity client
 io.sockets.on('connection', function (socket) {
 	console.log('we have a new connection');	
@@ -42,7 +42,7 @@ io.sockets.on('connection', function (socket) {
 	});
 
 	socket.on("join", function (username) {
-		console.log('someone wants to join');
+		console.log(username, "wants to join");
 		UserUsername = username;
 		if (true) // could check here for username verification
 		{
@@ -63,7 +63,8 @@ io.sockets.on('connection', function (socket) {
 	socket.on('chatMessage', function (message) {
 		// Message passed by a client to ther server with the intent of broadcasting to the chatroom
 		// optionally check here for user verification
-		io.socket.broadcast.emit("message", UserUsername + " says " + message);
+		console.log("broadcasting message:", message);
+		io.sockets.emit("chatMessage", UserUsername + " says " + message);
 	});
 
 
