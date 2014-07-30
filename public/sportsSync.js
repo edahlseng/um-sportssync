@@ -7,11 +7,12 @@ function setBodyHeight() {
 	    headerHeight = document.getElementById('header').clientHeight,
 	    x = w.innerWidth || e.clientWidth || g.clientWidth,
 	    y = w.innerHeight|| e.clientHeight|| g.clientHeight;
-	    // x = x - margin*2 - padding*2,
+	    x = x + 10,
 	    y = y - headerHeight; 
 
 	body = document.getElementById('body');
 	body.style.height = y + "px";
+	body.style.height = x + "px";
 }
 
 function sidebarToggle () {
@@ -22,13 +23,13 @@ function sidebarToggle () {
 	if (sidebar.getAttribute('class') == "open") {
 		sidebar.style.width = "2%";
 		sidebar.className = "closed";
-		main.style.width = '98%';
+		main.style.width = '97%';
 		stream.style.padding = '0 30px';
 	}
 	else if (sidebar.getAttribute('class') == "closed") {
 		sidebar.style.width = "33%";
 		sidebar.className = "open";
-		main.style.width = '67%';
+		main.style.width = '66%';
 		stream.style.padding = '0 10px';
 	}
 }
@@ -93,10 +94,10 @@ window.onload = function(event){
 
 	//event listeners
 
-	document.getElementById('sidebarToggle').onclick = function(event){
-		console.log("clicked");
-		sidebarToggle();
-	};
+	// document.getElementById('sidebarToggle').onclick = function(event){
+	// 	console.log("clicked");
+	// 	sidebarToggle();
+	// };
 
 	document.getElementById('commentButton').onclick = function(event){
 		console.log("clicked commentButton");
