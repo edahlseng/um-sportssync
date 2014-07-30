@@ -29,7 +29,6 @@ var io = require('socket.io').listen(server);
 
 // Called on a new connection from the client.  The socket object should be referenced for future communication with an explicity client
 io.sockets.on('connection', function (socket) {
-	console.log('we have a new connection');	
 	// The username for this socket.
 	//var user = User();
 	var UserUsername;
@@ -43,14 +42,23 @@ io.sockets.on('connection', function (socket) {
 
 	socket.on("join", function (username) {
 		console.log(username, "wants to join");
+
+		// remove UserUsername from the list if it already exists
+		if (UserUsername)
+		{
+			usersLoggedIn.pop(UserUsername);
+		}
+
 		UserUsername = username;
 		if (true) // could check here for username verification
 		{
-			response = {'errorCode' : 0, 'users' : usersLoggedIn};
-			socket.emit("joined", response);
-
 			// add to list of usernames here
 			usersLoggedIn.push(UserUsername);
+
+			response = {'errorCode' : 0, 'username' : UserUsername, 'users' : usersLoggedIn};
+			socket.emit("joined", response);
+
+			console.log(usersLoggedIn, "are logged onto the server");
 
 			socket.broadcast.emit("gropUpdate", username + " has joined the server.");
 		}
@@ -67,10 +75,8 @@ io.sockets.on('connection', function (socket) {
 		io.sockets.emit("chatMessage", UserUsername + " says " + message);
 	});
 
-
-
 	socket.on("disconnect", function() {
-		io.sockets.emit("update", UserUsername + " has left the server");
+		io.sockets.emit("groupUpdate", UserUsername + " has left the server");
 		usersLoggedIn.pop(UserUsername);
 	});
 

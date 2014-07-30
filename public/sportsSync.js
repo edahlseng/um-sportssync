@@ -132,7 +132,22 @@ window.onload = function(event){
 	setTimeout( function() {
 		document.getElementById('loading').style.height = '0px';
 	}, 1000);
-	
-
 };
 
+function joinAsUser(username)
+{
+	join(username);
+
+	// remove the currentUser id from the previously selected icon
+	var selectedIcon = document.querySelector('.currentUserIcon');
+	if (selectedIcon) {
+		selectedIcon.className = "icon";
+	}
+}
+
+function displayLoggedIn(username)
+{
+	// set the currentUser id to the proper element
+	var userIcon = document.getElementById(username + "Icon");
+	userIcon.className += " currentUserIcon"
+}

@@ -84,6 +84,15 @@ i:hover {
 	width: 30px;
 	height: 30px;
 	border-radius: 20px;
+	cursor: pointer;
+}
+
+.currentUserIcon {
+	width: 26px;
+	height: 26px;
+	border-style: solid;
+	border-width: 2px;
+	border-color: #FCFF32;
 }
 
 /*-------        Sidebar        -------*/

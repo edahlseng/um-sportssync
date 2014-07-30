@@ -1,10 +1,11 @@
-//var socket = io.connect("http://127.0.0.1:8080");
-var socket = io.connect("http://um-sportssync.media.mit.edu:10014");
+var socket = io.connect("http://127.0.0.1:8080");
+// var socket = io.connect("http://um-sportssync.media.mit.edu:10014");
 var currentUsername;
 
 function join(username)
 {
 	currentUsername = username;
+	console.log("Attempting to join as:", username);
 	socket.emit("join", username);
 }
 
@@ -14,7 +15,11 @@ function sendMessage(message)
 }
 
 socket.on("joined", function (info) {
-	console.log(info);
+	if (info.errorCode == 0)
+	{
+		displayLoggedIn(info.username);
+		console.log(info.users.length, "users logged in");
+	}
 });
 
 socket.on("groupUpdate", function (info) {
