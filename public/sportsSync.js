@@ -234,7 +234,6 @@ function minMaxSliderController (lowerBound, upperBound, valueChangedCallback, m
 		var basePosition = this._trackBlock.offsetLeft + (this._minBlock.clientWidth / 2.0);
 		var percentage = (this._value - this._lowerBound) / (this._upperBound - this._lowerBound);
 		var availableWidth = this._trackBlock.clientWidth - (this._maxBlock.clientWidth / 2.0 + this._valueBlock.clientWidth + this._minBlock.clientWidth / 2.0);
-		console.log(this._value);
 		this._valueBlock.style.left = (basePosition + (percentage * availableWidth)) + "px";
 	}
 
@@ -402,7 +401,6 @@ function startReplay() {
 }
 
 function pausePlayer() {
-	console.log('reached');
 	replayPlayer.pause();
 }
 
