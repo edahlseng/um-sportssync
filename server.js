@@ -120,4 +120,15 @@ function travis2() {
 				message: "They're almost as big as mine!"
 			}
 	io.sockets.emit("chatMessage", response);
+
+	setTimeout(lip1, 15000);
+}
+
+function lip1() {
+	var response = {
+				user: "lip",
+				messageType: "chat",
+				message: "Get back to work!"
+			}
+	io.sockets.emit("chatMessage", response);
 }

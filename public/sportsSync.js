@@ -410,13 +410,13 @@ function sendReplay() {
 	// send the replay
 	sendMessage({"startTime" : sliderController.min(), "endTime" : sliderController.max()}, "replay");
 
+	sliderController = null;
 	replayPlayer.removeEventListener("play", replayPlayed);
 	replayPlayer.removeEventListener("pause", replayPaused);
 	replayPlayer.removeEventListener("timeupdate", replayTimeUpdate);
 	replayPlayer = null;
 	document.getElementById('replayControlsContainer').style.visibility = "hidden";
 	document.getElementById('replaySteps').style.visibility = "hidden";
-	sliderController = null;
 	syncVideo();
 }
 
