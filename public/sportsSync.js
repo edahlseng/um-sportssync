@@ -200,7 +200,7 @@ function displayLoggedIn(username)
 
 // ******** Replay stuff ******
 
-function minMaxSliderController (lowerBound, upperBound, valueChangedCallback) {
+function minMaxSliderController (lowerBound, upperBound, valueChangedCallback, minCallback, maxCallback) {
 	this._lowerBound = lowerBound;
 	this._upperBound = upperBound;
 	this._min = lowerBound;
@@ -213,6 +213,8 @@ function minMaxSliderController (lowerBound, upperBound, valueChangedCallback) {
 	this._maxBlock = document.getElementById('sliderMax');
 
 	this.valueChangedCallback = valueChangedCallback;
+	this.minCallback = minCallback;
+	this.maxCallback = maxCallback;
 
 	this.updateMinBlockPosition = function () {
 		var basePosition = this._trackBlock.offsetLeft - (this._minBlock.clientWidth / 2.0);
@@ -263,6 +265,14 @@ function minMaxSliderController (lowerBound, upperBound, valueChangedCallback) {
 		newValue = Math.max(newValue, this._min);
 		this._value = newValue;
 		
+		// eventually just use one callback and an or statement
+		if (desiredValue == this._min) {
+			this.onMinReached();
+		}
+		if (desiredValue == this._max) {
+			this.onMaxReached();
+		}
+
 		// update visual appearance
 		this.updateValueBlockPosition();
 	}
@@ -282,6 +292,18 @@ function minMaxSliderController (lowerBound, upperBound, valueChangedCallback) {
 	this.onValueChanged = function () {
 		if (self.valueChangedCallback) {
 			self.valueChangedCallback(this._value);
+		}
+	}
+
+	this.onMinReached = function () {
+		if (self.minCallback) {
+			self.minCallback();
+		}
+	}
+
+	this.onMaxReached = function () {
+		if (self.maxCallback) {
+			self.maxCallback;
 		}
 	}
 
@@ -374,7 +396,7 @@ function startReplay() {
     replayPlayer.addEventListener("pause", replayPaused);
     replayPlayer.addEventListener("timeupdate", replayTimeUpdate);
     replayPlayer.pause();
-	sliderController = new minMaxSliderController(minTime, maxTime, setPlayerCurrentTime);
+	sliderController = new minMaxSliderController(minTime, maxTime, setPlayerCurrentTime, function () {replayPlayer.pause();}, function {replayPlayer.pause();});
 	document.getElementById('replayControlsContainer').style.visibility = "visible";
 	document.getElementById('replaySteps').style.visibility = "visible";
 }
