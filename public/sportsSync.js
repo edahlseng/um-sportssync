@@ -78,9 +78,12 @@ function updateStream (response) {
 			.replace("{className}", "");	
 	}
 	if (type === "bet") {
-		betHtml = user + " bets: <span>" + message + "</span>";
+		var betHtml = user + " bets: <span>" + message + "</span>",
+			d = new Date(),
+			uniqueID = d.getTime();
 		liHtml = liHtml.replace("{message}", betHtml)
 			.replace("{className}", "bet");	
+		liHtml += '<div class="betInteraction"><i class="fa fa-thumbs-up fa-lg betYes"></i><i class="fa fa-thumbs-down fa-lg betNo"></i><span id="'+ uniqueID +'"></span></div>'
 	}
 
 	console.log (liHtml);
@@ -92,6 +95,19 @@ function updateStream (response) {
 	ul.appendChild(li);
 	stream.scrollTop = stream.scrollHeight;
 	li.style.opacity = 1; //set height to inherit for effect
+	//countdown http://keith-wood.name/countdown.html
+	var t = new Date();
+	t.setSeconds(t.getSeconds() + 15);
+	// $("#countdown").countdown({until: t, compact: true});
+	$("#" + uniqueID).countdown({until: t,
+		compact: true, 
+	    onTick: highlightLast5}); 
+	     
+	function highlightLast5(periods) { 
+	    if ($.countdown.periodsToSeconds(periods) === 5) { 
+	        $(this).addClass('countdown-highlight'); 
+	    } 
+	}
 }
 
 window.addEventListener('resize', function(event){

@@ -12,7 +12,7 @@ body {
 	margin: 0;
 	font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;	
 	height: 100%;
-	overflow: hidden;
+	/*overflow: hidden;*/
 	background: #202029;
 	/*position: relative;*/
 }
@@ -25,6 +25,7 @@ body {
 	position: absolute;
 	top: 0;
 	z-index: 3;
+	padding-top: 20px;
 	-webkit-transition: opacity .5s; /* For Safari 3.1 to 6.0 */
     transition: opacity .5s;
 }
@@ -185,6 +186,24 @@ i:hover {
 
 .bet span {
 	font-weight: bold;
+}
+
+.betInteraction {
+	padding: 10px;
+}
+
+.betInteraction i {
+	padding-right: 15px;
+}
+
+.is-countdown {
+	border: none; 
+	background: none; 
+	font-size: 9px;
+}
+
+.countdown-highlight {
+	color: #349AD8;
 }
 
 /*-------        Main        -------*/

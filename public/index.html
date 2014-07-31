@@ -3,6 +3,12 @@
 	<head>
 		<title>SportsSync</title>
 
+		<!-- flip clock dependencies -->
+		<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>		
+		<link rel="stylesheet" type="text/css" href="countdown/jquery.countdown.css"> 
+		<script type="text/javascript" src="countdown/jquery.plugin.min.js"></script> 
+		<script type="text/javascript" src="countdown/jquery.countdown.min.js"></script>
+
 		<link rel="stylesheet" href="sportsSync.css"></link>
 		<script src="sportsSync.js"></script>
 		<link href="http://maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet">
@@ -13,6 +19,7 @@
 
 	</head>
 	<body id="body">
+		<div id="loading">Loading...</div>
 		<audio id="peerAudio" autoplay></audio>
 
 		<div id="header">
@@ -97,6 +104,21 @@
 						<div class="videoTimeStamp">1:19</div>
 					</div>
 					<div class="message bet">Savannah bets: <span>SF will call a timeout</span></div>
+					<div class="betInteraction"><i class="fa fa-thumbs-up fa-lg betYes"></i><i class="fa fa-thumbs-down fa-lg betNo"></i><span id="countdown"></span></div>
+					<script type="text/javascript">
+						var t = new Date();
+						t.setSeconds(t.getSeconds() + 15);
+						// $("#countdown").countdown({until: t, compact: true});
+						$('#countdown').countdown({until: t,
+							compact: true, 
+						    onTick: highlightLast5}); 
+						     
+						function highlightLast5(periods) { 
+						    if ($.countdown.periodsToSeconds(periods) === 5) { 
+						        $(this).addClass('countdown-highlight'); 
+						    } 
+						}
+					</script>
 				</li>
 			</ul>
 
@@ -121,7 +143,6 @@
 				<div id="betInput" class="closed"><textarea rows="3" id="betInputBox" class="textInput" type="text" name="textInput" placeholder="What will players bet on?"></textarea></div>
 			</div>
 		</div>
-		<div id="loading">Loading...</div>
 
 
 		
