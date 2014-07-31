@@ -206,6 +206,19 @@ i:hover {
 	color: #349AD8;
 }
 
+.replay {
+	width: 231px;
+	height: 130px;
+	background-image: url("https://lh3.ggpht.com/xDgEZKnV6btuM19GptKF3Xff1lRzYdJgpzTi2vfxW7tbwywSqUIStHaP9g2DT2rBuhc=h900");
+	background-size: cover;
+}
+
+.replay i {
+	width: 100%;
+	font-size: 100px;
+	text-align: center;
+}
+
 /*-------        Main        -------*/
 
 #main {
@@ -272,8 +285,9 @@ i:hover {
 /*------- Replay controls -------*/
 #replayControlsContainer {
 	position: relative;
-	width: 90%;
+	width: 100%;
 	height: 40px;
+	visibility: hidden;
 }
 
 #replayPlayPauseButton {
@@ -346,4 +360,25 @@ i:hover {
 	border-radius: 6px;
 	background: #ccc;
 	cursor: pointer;
+}
+
+#replaySteps {
+	visibility: hidden;
+}
+
+#replayStep1 {
+	display: inline-block;
+	color: lightgray;
+}
+
+#sendReplay {
+	display: inline-block;
+	margin-left: 40px;
+	height: 30px;
+	line-height: 30px;
+	font-size: 15px;
+	border-radius: 4px;
+	border: none;
+	outline: none;
+	background: lightgray;
 }

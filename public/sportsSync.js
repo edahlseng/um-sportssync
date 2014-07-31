@@ -67,7 +67,7 @@ function updateStream (response) {
 		type = response.messageType,
 		message = response.message,
 		li = document.createElement("li"),
-		liHtml = "<div class='author'><img class='icon chatIcon' src={userThumb}><span class='name'>{userName}</span><div class='videoTimeStamp'>1:15</div></div><div class='message {className}'>{message}</div>";
+		liHtml = "<div class='author'><img class='icon chatIcon' src={userThumb}><span class='name'>{userName}</span><div class='videoTimeStamp'>1:15</div></div><div class='message {messageClassName}'>{message}</div>";
 	
 	liHtml = liHtml.replace("{userThumb}", "'" + userThumb + "'")
 		.replace("{userName}", user);
@@ -75,16 +75,22 @@ function updateStream (response) {
 	//handle chat message types:
 	if (type === "chat") {
 		liHtml = liHtml.replace("{message}", message)
-			.replace("{className}", "");	
+			.replace("{messageClassName}", "");	
 	}
 	if (type === "bet") {
 		var betHtml = user + " bets: <span>" + message + "</span>",
 			d = new Date(),
 			uniqueID = d.getTime();
 		liHtml = liHtml.replace("{message}", betHtml)
-			.replace("{className}", "bet");	
+			.replace("{messageClassName}", "bet");	
 		liHtml += '<div class="betInteraction"><i class="fa fa-thumbs-up fa-lg betYes"></i><i class="fa fa-thumbs-down fa-lg betNo"></i><span id="'+ uniqueID +'"></span></div>'
 	}
+	if (type === "replay")
+	{
+		var replayHTML = '<i class="fa fa-retweet"></i>';
+		liHtml = liHtml.replace("{message}", replayHTML).replace("{messageClassName}", "replay");	
+	}
+
 
 	console.log (liHtml);
 
@@ -363,24 +369,25 @@ function startReplay() {
 	var maxTime = document.getElementById('videoPlayer').currentTime
 	var minTime = Math.max(0, maxTime - 15);
 
-	maxTime = 15.0;
-
 	replayPlayer = document.getElementById('videoPlayer');
 	replayPlayer.addEventListener("play", replayPlayed);
     replayPlayer.addEventListener("pause", replayPaused);
     replayPlayer.addEventListener("timeupdate", replayTimeUpdate);
 	sliderController = new minMaxSliderController(minTime, maxTime, setPlayerCurrentTime);
 	document.getElementById('replayControlsContainer').style.visibility = "visible";
+	document.getElementById('replaySteps').style.visibility = "visible";
 }
 
 function sendReplay() {
-	// send the message here
+	// send the replay
+	sendMessage({"startTime" : sliderController.min(), "endTime" : sliderController.max()}, "replay");
 
 	replayPlayer.removeEventListener("play", replayPlayed);
 	replayPlayer.removeEventListener("pause", replayPaused);
 	replayPlayer.removeEventListener("timeupdate", replayTimeUpdate);
 	replayPlayer = null;
 	document.getElementById('replayControlsContainer').style.visibility = "hidden";
+	document.getElementById('replaySteps').style.visibility = "hidden";
 	sliderController = null;
 }
 
@@ -405,15 +412,4 @@ function togglePlayPause() {
 		replayPlayer.pause();
 	}
 }
-
-// function minDragStart(e)
-// {
-// 	dragStart = e.clientX;
-// 	e.target.webkitRequestPointerLock();
-// 	document.addEventListener('webkitRequestPointerLock', minDrag);
-// }
-
-// function minDrag(e) {
-// 	console.log(e.clientX - dragStart);
-// }
 

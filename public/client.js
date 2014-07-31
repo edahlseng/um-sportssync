@@ -11,7 +11,8 @@ function join(username)
 
 function sendMessage(message, type)
 {
-	console.log("sending message: " + message);
+	console.log("sending message: ");
+	console.dir(message);
 	var data = {
 		message: message,
 		type: type
