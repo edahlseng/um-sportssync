@@ -299,6 +299,7 @@ i:hover {
 	border-color: #444;
 	outline: none;
 	background: black;
+	cursor: pointer;
 }
 
 #playSymbol {
