@@ -51,8 +51,12 @@ socket.on("chatMessage", function (response) {
 
 socket.on("start", function (data) {
 	started = true;
-	document.getElementById('videoPlayer').start();
+	document.getElementById('videoPlayer').play();
 });
+
+function startVideo() {
+	socket.emit("start", {});
+}
 
 
 // stuff for audio
