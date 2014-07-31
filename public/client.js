@@ -1,5 +1,5 @@
-//var socket = io.connect("http://127.0.0.1:8080");
-var socket = io.connect("http://um-sportssync.media.mit.edu:10014");
+var socket = io.connect("http://127.0.0.1:8080");
+// var socket = io.connect("http://um-sportssync.media.mit.edu:10014");
 var currentUsername;
 
 function join(username)
@@ -57,6 +57,17 @@ socket.on("start", function (data) {
 function startVideo() {
 	socket.emit("start", {});
 }
+
+function syncVideo() {
+	socket.emit("currentTime", {});
+}
+
+socket.on("currentTime", function (data) {
+	console.log("syncing with current time from server");
+	var videoPlayer = document.getElementById('videoPlayer');
+	videoPlayer.currentTime = data.timeElapsed;
+	videoPlayer.play();
+});
 
 
 // stuff for audio

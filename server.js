@@ -21,6 +21,7 @@ var server = app.listen(port, function() {
 // ===============================================================
 
 var usersLoggedIn = [];
+var startedTime;
 
 var io = require('socket.io').listen(server);
 
@@ -66,7 +67,16 @@ io.sockets.on('connection', function (socket) {
 	});
 
 	socket.on('start', function (data) {
+		startedTime = Date.now(); // current time in milliseconds
 		io.sockets.emit('start', data);
+
+		// start timers for canned inputs
+
+	});
+
+	socket.on('currentTime', function (data) {
+		data.timeElapsed = (Date.now() - startedTime) / 1000;
+		io.sockets.emit('currentTime');
 	});
 
 	socket.on('chatMessage', function (data) {
@@ -91,3 +101,5 @@ io.sockets.on('connection', function (socket) {
 
 
 });
+
+// functions that send off canned inputs
