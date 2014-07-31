@@ -362,7 +362,7 @@ var sliderController;
 var replayPlayer;
 
 function setPlayerCurrentTime(newValue) {
-	// replayPlayer.currentTime = newValue;
+	replayPlayer.currentTime = newValue;
 }
 
 function startReplay() {
@@ -373,6 +373,7 @@ function startReplay() {
 	replayPlayer.addEventListener("play", replayPlayed);
     replayPlayer.addEventListener("pause", replayPaused);
     replayPlayer.addEventListener("timeupdate", replayTimeUpdate);
+    replayPlayer.pause();
 	sliderController = new minMaxSliderController(minTime, maxTime, setPlayerCurrentTime);
 	document.getElementById('replayControlsContainer').style.visibility = "visible";
 	document.getElementById('replaySteps').style.visibility = "visible";
