@@ -105,7 +105,7 @@ io.sockets.on('connection', function (socket) {
 function travis1() {
 	var response = {
 				user: "trich",
-				messageType: "message",
+				messageType: "chat",
 				message: "Check out #79's muscles..."
 			}
 	io.sockets.emit("chatMessage", response);
@@ -116,7 +116,7 @@ function travis1() {
 function travis2() {
 	var response = {
 				user: "trich",
-				messageType: "message",
+				messageType: "chat",
 				message: "They're almost as big as mine!"
 			}
 	io.sockets.emit("chatMessage", response);
