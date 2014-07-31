@@ -266,10 +266,10 @@ function minMaxSliderController (lowerBound, upperBound, valueChangedCallback, m
 		this._value = newValue;
 		
 		// eventually just use one callback and an or statement
-		if (desiredValue == this._min) {
+		if (desiredValue <= this._min) {
 			this.onMinReached();
 		}
-		if (desiredValue == this._max) {
+		if (desiredValue >= this._max) {
 			this.onMaxReached();
 		}
 

@@ -30,6 +30,7 @@ function sendMessage(message, type)
 // 	socket.emit("chatMessage", [bet, "bet"]);
 // 	//later code to do other betting shit
 // }
+var started = false;
 
 socket.on("joined", function (info) {
 	if (info.errorCode == 0)
@@ -48,6 +49,10 @@ socket.on("chatMessage", function (response) {
 	updateStream(response);
 });
 
+socket.on("start", function (data) {
+	started = true;
+	document.getElementById('videoPlayer').start();
+});
 
 
 // stuff for audio

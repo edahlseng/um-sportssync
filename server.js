@@ -65,6 +65,10 @@ io.sockets.on('connection', function (socket) {
 		}
 	});
 
+	socket.on('start', function (data) {
+		io.sockets.emit('start', data);
+	});
+
 	socket.on('chatMessage', function (data) {
 		// Message passed by a client to ther server with the intent of broadcasting to the chatroom
 		// optionally check here for user verification
