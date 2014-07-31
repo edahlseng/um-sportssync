@@ -303,7 +303,7 @@ function minMaxSliderController (lowerBound, upperBound, valueChangedCallback, m
 
 	this.onMaxReached = function () {
 		if (self.maxCallback) {
-			self.maxCallback;
+			self.maxCallback();
 		}
 	}
 

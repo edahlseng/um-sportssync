@@ -291,6 +291,7 @@ i:hover {
 }
 
 #replayPlayPauseButton {
+	position: relative;
 	width: 40px;
 	height: 40px;
 	border-radius: 4px;
@@ -303,7 +304,7 @@ i:hover {
 }
 
 #playSymbol {
-	position: relative;
+	position: absolute;
 	top: 0;
 	left: 0;
 	width: 100%;
@@ -311,7 +312,7 @@ i:hover {
 }
 
 #pauseSymbol {
-	position: relative;
+	position: absolute;
 	top: 0;
 	left: 0;
 	width: 100%;
