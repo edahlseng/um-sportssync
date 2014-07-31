@@ -241,4 +241,81 @@ i:hover {
 	margin-top: 0px;
 }
 
+/*------- Replay controls -------*/
+#replayControlsContainer {
+	position: relative;
+	width: 90%;
+	height: 40px;
+}
 
+#replayPlayPauseButton {
+	width: 40px;
+	height: 40px;
+	border-radius: 4px;
+	border-style: solid;
+	border-width: 1px;
+	border-color: #444;
+	outline: none;
+	background: black;
+}
+
+#playSymbol {
+	width: 100%;
+	height: 100%;
+}
+
+#pauseSymbol {
+	width: 100%;
+	height: 100%;
+	visibility: hidden;
+}
+
+#minMaxSlider {
+	position: absolute;
+	top: 0;
+	right: 0;
+	width: -webkit-calc(100% - 50px);
+	height: 100%;
+}
+
+#sliderTrack {
+	position: absolute;
+	top: -webkit-calc(50% - 7px); /* don't forget to account for the border */
+	width: 100%;
+	height: 12px;
+	border-radius: 6px;
+	border-style: solid;
+	border-width: 1px;
+	border-color: #444;
+	background: black;
+}
+
+#sliderMin {
+	position: absolute;
+	top: 5%;
+	height: 90%;
+	width: 10px;
+	border-radius: 4px;
+	background: #666;
+	cursor: pointer;
+}
+
+#sliderMax {
+	position: absolute;
+	top: 5%;
+	height: 90%;
+	width: 10px;
+	border-radius: 4px;
+	background: #666;
+	cursor: pointer;
+}
+
+#sliderPosition {
+	position: absolute;
+	top: -webkit-calc(50% - 6px);
+	width: 12px;
+	height: 12px;
+	border-radius: 6px;
+	background: #ccc;
+	cursor: pointer;
+}

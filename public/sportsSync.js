@@ -170,9 +170,228 @@ function displayLoggedIn(username)
 	userIcon.className += " currentUserIcon"
 }
 
+// ******** Replay stuff ******
+
+function minMaxSliderController (lowerBound, upperBound, valueChangedCallback) {
+	this._lowerBound = lowerBound;
+	this._upperBound = upperBound;
+	this._min = lowerBound;
+	this._max = upperBound;
+	this._value = lowerBound;
+
+	this._trackBlock = document.getElementById('sliderTrack');
+	this._minBlock = document.getElementById('sliderMin');
+	this._valueBlock = document.getElementById('sliderPosition');
+	this._maxBlock = document.getElementById('sliderMax');
+
+	this.valueChangedCallback = valueChangedCallback;
+
+	this.updateMinBlockPosition = function () {
+		var basePosition = this._trackBlock.offsetLeft - (this._minBlock.clientWidth / 2.0);
+		var percentage = (this._min - this._lowerBound) / (this._upperBound - this._lowerBound);
+		var availableWidth = this._trackBlock.clientWidth - (this._maxBlock.clientWidth / 2.0 + this._valueBlock.clientWidth + this._minBlock.clientWidth / 2.0);
+		this._minBlock.style.left = (basePosition + (percentage * availableWidth)) + "px";
+	}
+
+	this.updateMaxBlockPosition = function () {
+		var basePosition = this._trackBlock.offsetLeft + (this._minBlock.clientWidth / 2.0) + this._valueBlock.clientWidth;
+		var percentage = (this._max - this._lowerBound) / (this._upperBound - this._lowerBound);
+		var availableWidth = this._trackBlock.clientWidth - (this._maxBlock.clientWidth / 2.0 + this._valueBlock.clientWidth + this._minBlock.clientWidth / 2.0);
+		this._maxBlock.style.left = (basePosition + (percentage * availableWidth)) + "px";
+	}
+
+	this.updateValueBlockPosition = function () {
+		var basePosition = this._trackBlock.offsetLeft + (this._minBlock.clientWidth / 2.0);
+		var percentage = (this._value - this._lowerBound) / (this._upperBound - this._lowerBound);
+		var availableWidth = this._trackBlock.clientWidth - (this._maxBlock.clientWidth / 2.0 + this._valueBlock.clientWidth + this._minBlock.clientWidth / 2.0);
+		console.log(this._value);
+		this._valueBlock.style.left = (basePosition + (percentage * availableWidth)) + "px";
+	}
+
+	this.setMin = function (desiredMin) {
+		var newMin = Math.max(this._lowerBound, desiredMin);
+		newMin = Math.min(newMin, this._max);
+		this._min = newMin;
+		this._value = Math.max(this._min, this._value);
+		
+		// update visual appearance
+		this.updateMinBlockPosition();
+		this.updateValueBlockPosition();
+	}
+
+	this.setMax = function (desiredMax) {
+		var newMax = Math.min(this._upperBound, desiredMax);
+		newMax = Math.max(newMax, this._min);
+		this._max = newMax;
+		this._value = Math.min(this._max, this._value);
+		
+		// update visual appearance
+		this.updateMaxBlockPosition();
+		this.updateValueBlockPosition();
+	}
+
+	this.setValue = function (desiredValue) {
+		var newValue = Math.min(desiredValue, this._max);
+		newValue = Math.max(newValue, this._min);
+		this._value = newValue;
+		
+		// update visual appearance
+		this.updateValueBlockPosition();
+	}
+
+	this.min = function () {
+		return this._min;
+	}
+
+	this.max = function () {
+		return this._max;
+	}
+
+	this.value = function () {
+		return this._value;
+	}
+
+	this.onValueChanged = function () {
+		if (self.valueChangedCallback) {
+			self.valueChangedCallback(this._value);
+		}
+	}
+
+	self = this;
+	this.tracking = "";
+	this.startingPropertyValue;
+	this.startingMouseLocationX;
+	this.valuesPerPixels;
+
+	// TODO:
+	// take care of small bugs like if you release your mouse outside of the browser window
+	//
+	this.setupDrag = function (e) {
+		self.startingMouseLocationX = e.clientX;
+		var availableWidth = this._trackBlock.clientWidth - (this._maxBlock.clientWidth / 2.0 + this._valueBlock.clientWidth + this._minBlock.clientWidth / 2.0);
+		self.valuesPerPixels = (self._upperBound - self._lowerBound) / availableWidth;
+		window.addEventListener("mousemove", self.mouseMove);
+		window.addEventListener("mouseup", self.mouseUp);
+	}
+
+	this.minMouseDown = function (e) {
+		self.startingPropertyValue = self._min;
+		self.tracking = "min";
+		self.setupDrag(e);
+	}
+
+	this.maxMouseDown = function (e) {
+		self.startingPropertyValue = self._max;
+		self.tracking = "max";
+		self.setupDrag(e);
+	}
+
+	this.valuePositionMouseDown = function (e) {
+		self.startingPropertyValue = self._value;
+		self.tracking = "value";
+		self.setupDrag(e);
+	}
+
+	this.mouseMove = function (e) {
+		e.preventDefault(); // stop the weird text selection stuff
+		var dragDistance = e.clientX - self.startingMouseLocationX;
+		switch (self.tracking)
+		{
+			case "min":
+				self.setMin((dragDistance * self.valuesPerPixels) + self.startingPropertyValue);
+				break;
+			case "max":
+				self.setMax((dragDistance * self.valuesPerPixels) + self.startingPropertyValue);
+				break;
+			case "value":
+				self.setValue((dragDistance * self.valuesPerPixels) + self.startingPropertyValue);
+				break;
+		}
+		self.onValueChanged();
+	}
+
+	this.mouseUp = function (e) {
+		self.mouseMove(e); // make sure we make any last adjustments that might be necessary
+		self.tracking = "";
+		self.startingPropertyValue = null;
+		self.startingMouseLocationX = null;
+		self.valuesPerPixels = null;
+		window.removeEventListener("mousemove", self.mouseMove);
+		window.removeEventListener("mouseUp", self.mouseUp);
+	}
+
+	this._minBlock.addEventListener("mousedown", this.minMouseDown);
+	this._maxBlock.addEventListener("mousedown", this.maxMouseDown);
+	this._valueBlock.addEventListener("mousedown", this.valuePositionMouseDown);
+
+	this.updateMinBlockPosition();
+	this.updateValueBlockPosition();
+	this.updateMaxBlockPosition();
+	this.onValueChanged();
+}
+
+var sliderController;
+var replayPlayer;
+
+function setPlayerCurrentTime(newValue) {
+	// replayPlayer.currentTime = newValue;
+}
+
 function startReplay() {
 	var maxTime = document.getElementById('videoPlayer').currentTime
 	var minTime = Math.max(0, maxTime - 15);
 
-	
+	maxTime = 15.0;
+
+	replayPlayer = document.getElementById('videoPlayer');
+	replayPlayer.addEventListener("play", replayPlayed);
+    replayPlayer.addEventListener("pause", replayPaused);
+    replayPlayer.addEventListener("timeupdate", replayTimeUpdate);
+	sliderController = new minMaxSliderController(minTime, maxTime, setPlayerCurrentTime);
+	document.getElementById('replayControlsContainer').style.visibility = "visible";
 }
+
+function sendReplay() {
+	// send the message here
+
+	replayPlayer.removeEventListener("play", replayPlayed);
+	replayPlayer.removeEventListener("pause", replayPaused);
+	replayPlayer.removeEventListener("timeupdate", replayTimeUpdate);
+	replayPlayer = null;
+	document.getElementById('replayControlsContainer').style.visibility = "hidden";
+	sliderController = null;
+}
+
+function replayPlayed() {
+	document.getElementById('playSymbol').style.visibility = "hidden";
+	document.getElementById('pauseSymbol').style.visibility = "visible";
+}
+
+function replayPaused() {
+	document.getElementById('playSymbol').style.visibility = "visible";
+	document.getElementById('pauseSymbol').style.visibility = "hidden";
+}
+
+function replayTimeUpdate() {
+	sliderController.setValue(replayPlayer.currentTime);
+}
+
+function togglePlayPause() {
+	if (replayPlayer.paused) {
+		replayPlayer.play();
+	} else {
+		replayPlayer.pause();
+	}
+}
+
+// function minDragStart(e)
+// {
+// 	dragStart = e.clientX;
+// 	e.target.webkitRequestPointerLock();
+// 	document.addEventListener('webkitRequestPointerLock', minDrag);
+// }
+
+// function minDrag(e) {
+// 	console.log(e.clientX - dragStart);
+// }
+
