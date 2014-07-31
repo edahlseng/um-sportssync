@@ -71,12 +71,12 @@ io.sockets.on('connection', function (socket) {
 		io.sockets.emit('start', data);
 
 		// start timers for canned inputs
-
+		setTimeout(travis1, 9000);
 	});
 
 	socket.on('currentTime', function (data) {
 		data.timeElapsed = (Date.now() - startedTime) / 1000;
-		io.sockets.emit('currentTime');
+		socket.emit('currentTime', data);
 	});
 
 	socket.on('chatMessage', function (data) {
@@ -89,7 +89,6 @@ io.sockets.on('connection', function (socket) {
 				messageType: data.type,
 				message: data.message
 			}
-			// io.sockets.emit("chatMessage", UserUsername + " says " + message);
 			io.sockets.emit("chatMessage", response);
 		}
 	});
@@ -103,3 +102,22 @@ io.sockets.on('connection', function (socket) {
 });
 
 // functions that send off canned inputs
+function travis1() {
+	var response = {
+				user: "trich",
+				messageType: "message",
+				message: "Check out #79's muscles..."
+			}
+	io.sockets.emit("chatMessage", response);
+
+	setTimeout(travis2, 2000);
+}
+
+function travis2() {
+	var response = {
+				user: "trich",
+				messageType: "message",
+				message: "They're almost as big as mine!"
+			}
+	io.sockets.emit("chatMessage", response);
+}
