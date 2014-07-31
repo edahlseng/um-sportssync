@@ -12,7 +12,8 @@ body {
 	margin: 0;
 	font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;	
 	height: 100%;
-	overflow: hidden;
+	/*overflow: hidden;*/
+	background: #202029;
 	/*position: relative;*/
 }
 
@@ -24,6 +25,7 @@ body {
 	position: absolute;
 	top: 0;
 	z-index: 3;
+	padding-top: 20px;
 	-webkit-transition: opacity .5s; /* For Safari 3.1 to 6.0 */
     transition: opacity .5s;
 }
@@ -104,7 +106,6 @@ i:hover {
 	background: #292934;
 	margin-top: 50px;
 	overflow-x: hidden;
-	overflow-y: scroll;
 }
 
 #sidebarToggle {
@@ -150,6 +151,9 @@ i:hover {
 #stream li {
 	padding: 5px;
 	font-weight: 300;
+	overflow: hidden;
+	-webkit-transition: opacity .25s; /* For Safari 3.1 to 6.0 */
+    transition: opacity .25s;
 }
 
 .name {
@@ -184,6 +188,37 @@ i:hover {
 	font-weight: bold;
 }
 
+.betInteraction {
+	padding: 10px;
+}
+
+.betInteraction i {
+	padding-right: 15px;
+}
+
+.is-countdown {
+	border: none; 
+	background: none; 
+	font-size: 9px;
+}
+
+.countdown-highlight {
+	color: #349AD8;
+}
+
+.replay {
+	width: 231px;
+	height: 130px;
+	background-image: url("https://lh3.ggpht.com/xDgEZKnV6btuM19GptKF3Xff1lRzYdJgpzTi2vfxW7tbwywSqUIStHaP9g2DT2rBuhc=h900");
+	background-size: cover;
+}
+
+.replay i {
+	width: 100%;
+	font-size: 100px;
+	text-align: center;
+}
+
 /*-------        Main        -------*/
 
 #main {
@@ -195,12 +230,18 @@ i:hover {
 	width: 67%;
 	right: 0px;
 	/*overflow: hidden;*/
+	top: 50px;
+}
+
+#videoContainer {
+	margin: 80px auto;
+	margin-bottom: 0px;
 }
 
 #videoPlayer {
 	background: black;
 	color: white;
-	margin: 80px auto 20px auto;
+	/*margin: 80px 75px 0 75px;*/
 	/*height: 350px;*/
 	/*width: 800px;*/
 	background-image: url("https://lh3.ggpht.com/xDgEZKnV6btuM19GptKF3Xff1lRzYdJgpzTi2vfxW7tbwywSqUIStHaP9g2DT2rBuhc=h900");
@@ -241,4 +282,103 @@ i:hover {
 	margin-top: 0px;
 }
 
+/*------- Replay controls -------*/
+#replayControlsContainer {
+	position: relative;
+	width: 100%;
+	height: 40px;
+	visibility: hidden;
+}
 
+#replayPlayPauseButton {
+	width: 40px;
+	height: 40px;
+	border-radius: 4px;
+	border-style: solid;
+	border-width: 1px;
+	border-color: #444;
+	outline: none;
+	background: black;
+}
+
+#playSymbol {
+	width: 100%;
+	height: 100%;
+}
+
+#pauseSymbol {
+	width: 100%;
+	height: 100%;
+	visibility: hidden;
+}
+
+#minMaxSlider {
+	position: absolute;
+	top: 0;
+	right: 0;
+	width: -webkit-calc(100% - 50px);
+	height: 100%;
+}
+
+#sliderTrack {
+	position: absolute;
+	top: -webkit-calc(50% - 7px); /* don't forget to account for the border */
+	width: 100%;
+	height: 12px;
+	border-radius: 6px;
+	border-style: solid;
+	border-width: 1px;
+	border-color: #444;
+	background: black;
+}
+
+#sliderMin {
+	position: absolute;
+	top: 5%;
+	height: 90%;
+	width: 10px;
+	border-radius: 4px;
+	background: #666;
+	cursor: pointer;
+}
+
+#sliderMax {
+	position: absolute;
+	top: 5%;
+	height: 90%;
+	width: 10px;
+	border-radius: 4px;
+	background: #666;
+	cursor: pointer;
+}
+
+#sliderPosition {
+	position: absolute;
+	top: -webkit-calc(50% - 6px);
+	width: 12px;
+	height: 12px;
+	border-radius: 6px;
+	background: #ccc;
+	cursor: pointer;
+}
+
+#replaySteps {
+	visibility: hidden;
+}
+
+#replayStep1 {
+	display: inline-block;
+	color: lightgray;
+}
+
+#sendReplay {
+	display: inline-block;
+	margin-left: 40px;
+	height: 30px;
+	line-height: 30px;
+	font-size: 15px;
+	border-radius: 4px;
+	border: none;
+	outline: none;
+	background: lightgray;
+}

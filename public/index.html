@@ -3,6 +3,12 @@
 	<head>
 		<title>SportsSync</title>
 
+		<!-- flip clock dependencies -->
+		<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>		
+		<link rel="stylesheet" type="text/css" href="countdown/jquery.countdown.css"> 
+		<script type="text/javascript" src="countdown/jquery.plugin.min.js"></script> 
+		<script type="text/javascript" src="countdown/jquery.countdown.min.js"></script>
+
 		<link rel="stylesheet" href="sportsSync.css"></link>
 		<script src="sportsSync.js"></script>
 		<link href="http://maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet">
@@ -13,6 +19,7 @@
 
 	</head>
 	<body id="body">
+		<div id="loading">Loading...</div>
 		<audio id="peerAudio" autoplay></audio>
 
 		<div id="header">
@@ -97,6 +104,21 @@
 						<div class="videoTimeStamp">1:19</div>
 					</div>
 					<div class="message bet">Savannah bets: <span>SF will call a timeout</span></div>
+					<div class="betInteraction"><i class="fa fa-thumbs-up fa-lg betYes"></i><i class="fa fa-thumbs-down fa-lg betNo"></i><span id="countdown"></span></div>
+					<script type="text/javascript">
+						var t = new Date();
+						t.setSeconds(t.getSeconds() + 15);
+						// $("#countdown").countdown({until: t, compact: true});
+						$('#countdown').countdown({until: t,
+							compact: true, 
+						    onTick: highlightLast5}); 
+						     
+						function highlightLast5(periods) { 
+						    if ($.countdown.periodsToSeconds(periods) === 5) { 
+						        $(this).addClass('countdown-highlight'); 
+						    } 
+						}
+					</script>
 				</li>
 			</ul>
 
@@ -104,22 +126,44 @@
 			</div>
 		</div>
 		<div id="main">
-			<video id="videoPlayer" src="/videoAssets/superbowl2014.mp4" autoplay></video>
+			<div id="videoContainer">
+				<video id="videoPlayer" src="/videoAssets/superbowl2014.mp4" autoplay></video>
+				<div id="replayControlsContainer">
+					<button id="replayPlayPauseButton">
+						<svg id="playSymbol" viewBox="0 0 100 100">
+		                    <path d="M25,20 L80,50 L25,80 Z" fill="#FFFFFF" />
+		                </svg>
+		                <svg id="pauseSymbol" viewBox="0 0 100 100">
+		                    <rect x="22" y="20" rx="2" ry="2" width="18" height="60" fill="#FFFFFF" />
+		                    <rect x="58" y="20" rx="2" ry="2" width="18" height="60" fill="#FFFFFF" />
+		                </svg>
+					</button>
+					<div id="minMaxSlider">
+						<div id="sliderTrack"></div>
+						<div id="sliderMin"></div>
+						<div id="sliderMax" ></div>
+						<div id="sliderPosition"></div>
+					</div>
+				</div>
+			</div>
 			<div id="addPost">
 				<div id="postControls">
 					<ul class="horizontalList">
 						<li><i class="fa fa-comment-o" id="commentButton"></i></li>
 						<li><i class="fa fa-smile-o"></i></li>
 						<li><i class="fa fa-camera-retro"></i></li>
-						<li><i class="fa fa-retweet"></i></li>
-						<li><i class="fa fa-life-saver" id="betButton"></i></li>
+						<li><i class="fa fa-retweet" id="replayButton" onclick=startReplay()></i></li>
+						<li><i class="fa fa-bitcoin" id="betButton"></i></li>
 					</ul>
 				</div>
 				<div id="postInput" class="closed"><textarea rows="3" id="postInputBox" class="textInput" type="text" name="textInput" placeholder="Type a message..."></textarea></div>
 				<div id="betInput" class="closed"><textarea rows="3" id="betInputBox" class="textInput" type="text" name="textInput" placeholder="What will players bet on?"></textarea></div>
+				<div id="replaySteps">
+					<div id="replayStep1">1. Set start and end times <i class="fa fa-check" style="visibility: hidden;"></i></div>
+					<button id="sendReplay" onclick=sendReplay()>Send Replay!</div>
+				</div>
 			</div>
 		</div>
-		<div id="loading">Loading...</div>
 
 
 		
