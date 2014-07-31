@@ -12,7 +12,7 @@ body {
 	margin: 0;
 	font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;	
 	height: 100%;
-	/*overflow: hidden;*/
+	overflow: hidden;
 	background: #202029;
 	/*position: relative;*/
 }

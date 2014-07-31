@@ -415,6 +415,8 @@ function sendReplay() {
 	replayPlayer = null;
 	document.getElementById('replayControlsContainer').style.visibility = "hidden";
 	document.getElementById('replaySteps').style.visibility = "hidden";
+	document.getElementById('pauseSymbol').style.visibility = "hidden";
+	document.getElementById('playSymbol').style.visibility = "hidden";
 	syncVideo();
 }
 
