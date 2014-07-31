@@ -396,7 +396,7 @@ function startReplay() {
     replayPlayer.addEventListener("pause", replayPaused);
     replayPlayer.addEventListener("timeupdate", replayTimeUpdate);
     replayPlayer.pause();
-	sliderController = new minMaxSliderController(minTime, maxTime, setPlayerCurrentTime, function () {replayPlayer.pause();}, function {replayPlayer.pause();});
+	sliderController = new minMaxSliderController(minTime, maxTime, setPlayerCurrentTime, function () {replayPlayer.pause();}, function () {replayPlayer.pause();});
 	document.getElementById('replayControlsContainer').style.visibility = "visible";
 	document.getElementById('replaySteps').style.visibility = "visible";
 }
